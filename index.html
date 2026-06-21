@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -198,6 +198,7 @@ let totalAlters=0; // 总改命次数
 let ripple=0;   // 时空涟漪强度
 let parUnstable=false; // 平行时空不稳定
 let fateLock=0; // 天命解封惩罚标记
+let slowPenalty=0; // 妄念改写累积减速代价
 
 // ========== 关卡定义 (18关完整版) ==========
 const LEVELS=[
@@ -575,8 +576,8 @@ function useMove(){
 function useRewrite(){
   if(pl.skCd.rewrite>0)return;
   wn++;totalAlters++;pl.skCd.rewrite=500;
-  // 效果：减慢速度并短暂无敌
-  sp-=2;pl.inv=true;pl.invT=100;
+  // 效果：累积减速并短暂无敌
+  slowPenalty+=0.5;pl.inv=true;pl.invT=100;
   // 代价：承受痛苦（屏幕抖动+粒子）
   pl.painTimer=120;
   spP(PX,pl.y,20,'#ff4444',6);
@@ -647,10 +648,11 @@ function loop(){
 
   // 速度计算（含天气+天命惩罚）
   let effSp=BS+dst*.0002;
+  effSp-=slowPenalty; // 妄念改写累积减速
   if(lv.weather==='rain')effSp*=1.08; // 雨天路滑，实际速度更快但更难控制
   if(lv.weather==='snow')effSp*=.92; // 雪天慢
   if(fateLock>0)effSp*=.7;
-  effSp=Math.min(MS,Math.max(BS*.7,effSp));
+  effSp=Math.min(MS,Math.max(BS*.4,effSp)); // 底限40%
   sp=effSp;
 
   dst+=sp*.1;sc=Math.floor(dst);levelDist+=sp*.1;
