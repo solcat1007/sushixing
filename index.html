@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>溯世行 — 宿命国风横版跑酷</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#c62828">
+
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏳</text></svg>">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -1155,6 +1158,16 @@ for(let i=0;i<40;i++){
 requestAnimationFrame(loop);
 console.log('溯世行 v2 — 五大技能 | 18关完整版 | 平行时空残影 | 过场演出 | 天气系统');
 console.log('E=寸光回溯 Q=丹心护体 R=山河移步 T=妄念改写 Y=天命解封');
+</script>
+
+<script>
+/* PWA: 注册 Service Worker，注册后本页被缓存，断网也能打开。
+   catch 掉异常，浏览器不支持时不影响正常功能。 */
+if ('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
