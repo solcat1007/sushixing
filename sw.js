@@ -12,12 +12,16 @@
  *   - 只缓存同源资源，跨域的 CDN 资源不缓存（本项目是纯离线的，没有 CDN 依赖）
  * ========================================================== */
 
-const CACHE = 'breathing-exercise-v1';
+const CACHE = 'sushixing-v3';
 
 // 需要预缓存的文件清单（相对路径）
 const ASSETS = [
   './',
   './index.html',
+  './js/config.js',
+  './js/art.js',
+  './js/engine.js',
+  './js/main.js',
   './manifest.webmanifest',
   './icon.svg'
 ];
