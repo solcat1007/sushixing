@@ -40,7 +40,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))
+        keys.filter((k) => k.startsWith('sushixing-') && k !== CACHE).map((k) => caches.delete(k))
       )
     )
   );
